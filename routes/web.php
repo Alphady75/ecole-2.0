@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 
@@ -14,8 +15,16 @@ use TCG\Voyager\Facades\Voyager;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
+}); */
+
+Route::controller(Controller::class)->group(function () {
+    Route::get('/', 'index')->name('accueil');
+    Route::get('/about', 'about')->name('about');
+    Route::get('/ateliers', 'ateliers')->name('ateliers');
+    Route::get('/actualites', 'actualites')->name('actualites');
+    Route::get('/contact', 'contact')->name('contact');
 });
 
 
