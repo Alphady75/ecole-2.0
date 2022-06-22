@@ -36,6 +36,12 @@
                 @else
                     <li><a href="/actualites">Actualité</a></li>
                 @endif
+
+                @if (Route::is('contact'))
+                    <li><a href="{{ route('contact') }}" class="active">Contact</a></li>
+                @else
+                    <li><a href="/contact">Contact</a></li>
+                @endif
                 <li class="dropdown"><a href="#"><span>Création du compte</span> <i
                             class="bi bi-chevron-down dropdown-indicator"></i></a>
                     <ul>
@@ -54,12 +60,6 @@
                         <li><a href="connexion/connexionP.html">Compte professeur</a></li>
                     </ul>
                 </li>
-
-                @if (Route::is('contact'))
-                    <li><a href="{{ route('contact') }}" class="active">Contact</a></li>
-                @else
-                    <li><a href="/contact">Contact</a></li>
-                @endif
             </ul>
         </nav><!-- .navbar -->
 
