@@ -9,8 +9,8 @@
     @livewireStyles()
 
     <!-- Favicons -->
-    <link href="assets/img/logoi.png" rel="icon">
-    <link href="assets/img/logoi.png" rel="apple-touch-icon">
+    <link href="{{ asset('assets/img/logoi.png') }}" rel="icon">
+    <link href="{{ asset('assets/img/logoi.png') }}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,6 +29,8 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+
+    @yield('extra-css')
 </head>
 
 <body>
@@ -39,7 +41,7 @@
 
     <div id="preloader"></div>
 
-    
+
     @livewireScripts()
 
     <!-- Vendor JS Files -->

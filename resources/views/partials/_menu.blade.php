@@ -21,28 +21,49 @@
                 @if (Route::is('about'))
                     <li><a href="{{ route('about') }}" class="active">à propros de nous</a></li>
                 @else
-                    <li><a href="/about">à propros de nous</a></li>
+                    <li><a href="{{ route('about') }}">à propros de nous</a></li>
                 @endif
 
                 @if (Route::is('ateliers'))
                     <li><a href="{{ route('ateliers') }}" class="active">Ateliers pratiques</a></li>
                 @else
-                    <li><a href="/ateliers">Ateliers pratiques</a></li>
+                    <li><a href="{{ route('ateliers') }}">Ateliers pratiques</a></li>
                 @endif
                 <li><a href="#">Filière</a></li>
 
                 @if (Route::is('actualites'))
                     <li><a href="{{ route('actualites') }}" class="active">Actualité</a></li>
                 @else
-                    <li><a href="/actualites">Actualité</a></li>
+                    <li><a href="{{ route('actualites') }}">Actualité</a></li>
                 @endif
 
                 @if (Route::is('contact'))
                     <li><a href="{{ route('contact') }}" class="active">Contact</a></li>
                 @else
-                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="{{ route('contact') }}">Contact</a></li>
                 @endif
-                <li class="dropdown"><a href="#"><span>Création du compte</span> <i
+
+                @if (Route::has('login'))
+                    @auth
+                        <li class="dropdown"><a href="#"><span>{{ Auth::user()->pseudo ?? Auth::user()->name }}</span> <i
+                                    class="bi bi-chevron-down dropdown-indicator"></i></a>
+                            <ul>
+                                <li>
+                                    <a href="{{ route('logout') }}" class="dropdown-item " onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        Déconnexion
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @else
+                        @if (Route::is('login'))
+                            <li><a href="/login" class="active">Compte</a></li>
+                        @else
+                            <li><a href="/login">Compte</a></li>
+                        @endif
+                    @endauth
+                @endif
+                {{-- <li class="dropdown"><a href="#"><span>Création du compte</span> <i
                             class="bi bi-chevron-down dropdown-indicator"></i></a>
                     <ul>
                         <li><a href="connexion/connexion.html">Compte étudiant</a></li>
@@ -59,7 +80,7 @@
               <li><a href="#">Dropdown 3</a></li>-->
                         <li><a href="connexion/connexionP.html">Compte professeur</a></li>
                     </ul>
-                </li>
+                </li> --}}
             </ul>
         </nav><!-- .navbar -->
 
