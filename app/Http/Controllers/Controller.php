@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Actualite;
+use App\Models\Atelier;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -24,7 +25,9 @@ class Controller extends BaseController
 
     public function ateliers()
     {
-        return view('ateliers');
+        $ateliers = Atelier::orderBy('created_at', 'desc')->paginate(6);
+
+        return view('ateliers', compact('ateliers'));
     }
 
     public function actualites()
