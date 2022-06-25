@@ -49,6 +49,15 @@
                                 href="#"><span>{{ Auth::user()->pseudo ?? Auth::user()->name }}</span> <i
                                     class="bi bi-chevron-down dropdown-indicator"></i></a>
                             <ul>
+                                @if (Auth::user()->statut == 'Etudiant')
+                                    <li><a href="#">Bibliothèque</a></li>
+
+                                @endif
+
+                                @if (Auth::user()->statut == 'Professeur')
+                                    <li><a href="#">Saisie des notes</a></li>
+
+                                @endif
                                 <li>
                                     <a href="{{ route('logout') }}" class="dropdown-item "
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

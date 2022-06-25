@@ -85,7 +85,7 @@
                             <label for="">Statut</label>
                             <select class="form-control @error('statut') is-invalid @enderror" name="statut" id="">
                                 <option value="">Statut</option>
-                                <option value="Elève" {{ old('statut') == 'Elève' ? 'selected' : '' }}>Elève
+                                <option value="Etudiant" {{ old('statut') == 'Etudiant' ? 'selected' : '' }}>Etudiant
                                 </option>
                                 <option value="Professeur" {{ old('statut') == 'Professeur' ? 'selected' : '' }}>Professeur
                                 </option>
