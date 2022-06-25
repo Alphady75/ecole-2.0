@@ -24,6 +24,7 @@ Route::controller(Controller::class)->group(function () {
     Route::get('/about', 'about')->name('about');
     Route::get('/ateliers', 'ateliers')->name('ateliers');
     Route::get('/actualites', 'actualites')->name('actualites');
+    Route::get('/actualite/{slug}', 'showActualite')->name('show.actualite');
     Route::get('/contact', 'contact')->name('contact');
 });
 

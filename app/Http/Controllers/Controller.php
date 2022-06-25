@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actualite;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -28,7 +29,16 @@ class Controller extends BaseController
 
     public function actualites()
     {
-        return view('actualites');
+        $actualites = Actualite::orderBy('created_at', 'desc')->paginate(6);
+
+        return view('actualites', compact('actualites'));
+    }
+
+    public function showActualite($slug)
+    {
+        $actualite = Actualite::where('slug', $slug)->first();
+
+        return view('show-actualite', compact('actualite'));
     }
 
     public function contact()
