@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Actualite;
 use App\Models\Atelier;
+use App\Models\Ouvrage;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -47,5 +48,60 @@ class Controller extends BaseController
     public function contact()
     {
         return view('contact');
+    }
+
+    public function ouvrages()
+    {
+        $ouvrages = Ouvrage::orderBy('created_at', 'desc')->paginate(6);
+
+        return view('ouvrages', compact('ouvrages'));
+    }
+
+    /* La fonction de suppression des mots inutiles pour la recherche */
+    private function remove_not_usefull_words($str)
+    {
+        // to lower case
+        $str = strtolower($str);
+
+        // exclude words (rajouter ceux qui manquent)
+        $not_use_words = [
+            'comment', 'que', 'qui', 'quand', 'pourquoi', 'pour', 'quoi',
+            'comme', 'avec', 'sans', 'faire', 'avoir', 'être', 'mais',
+            'ou', 'et', 'donc', 'or', 'ni', 'car', 'si', 'de', 'des',
+            'un', 'une', 'juste', 'qu', 'est', 'sont', 'lors', 'en', 'a'
+        ];
+
+        $len = count($not_use_words);
+        // remove words
+        for ($i = 0; $i < $len; $i++) {
+            $str = str_replace($not_use_words[$i] . ' ', '', $str);
+        }
+
+        return $str;
+    }
+
+    /* La fonction de recherche des mots clés */
+    public function search()
+    {
+
+        $search = request()->input('search');
+
+        $search_part = $this->remove_not_usefull_words($search);
+        $search_words = explode(' ', $search_part);
+        /* $search = array_filter($search);
+        $search = array_unique($search);
+        $search = array_values($search);
+        $search = implode(' ', $search); */
+
+        $actualites = Actualite::Where(function ($query) use ($search_words) {
+                for ($i = 0; $i < count($search_words); $i++) {
+                    $query->orwhere('title', 'LIKE', '%' . $search_words[$i] . '%');
+                    $query->orwhere('content', 'LIKE', '%' . $search_words[$i] . '%');
+                    $query->orwhere('slug', 'LIKE', '%' . $search_words[$i] . '%');
+                }
+            })
+            ->paginate(6);
+
+        return view('result-search-actualites', compact('actualites', 'search'));
     }
 }

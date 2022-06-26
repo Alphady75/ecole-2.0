@@ -50,7 +50,7 @@
                                     class="bi bi-chevron-down dropdown-indicator"></i></a>
                             <ul>
                                 @if (Auth::user()->statut == 'Etudiant')
-                                    <li><a href="#">Bibliothèque</a></li>
+                                    <li><a href="{{ route('ouvrages') }}">Bibliothèque</a></li>
 
                                 @endif
 

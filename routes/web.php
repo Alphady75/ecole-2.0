@@ -26,6 +26,9 @@ Route::controller(Controller::class)->group(function () {
     Route::get('/actualites', 'actualites')->name('actualites');
     Route::get('/actualite/{slug}', 'showActualite')->name('show.actualite');
     Route::get('/contact', 'contact')->name('contact');
+    Route::get('/ouvrages', 'ouvrages')->name('ouvrages');
+    Route::get('/ouvrage/{slug}', 'showOuvrage')->name('show.ouvrage');
+    Route::get('/search/actualite', 'search')->name('search.actualite');
 });
 
 
