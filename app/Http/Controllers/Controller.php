@@ -104,4 +104,34 @@ class Controller extends BaseController
 
         return view('result-search-actualites', compact('actualites', 'search'));
     }
+
+    public function showOuvrage($slug)
+    {
+        $ouvrage = Ouvrage::where('slug', $slug)->first();
+
+        return view('show-ouvrage', compact('ouvrage'));
+    }
+
+    public function searchOuvrage()
+    {
+
+        $search = request()->input('search');
+
+        $search_part = $this->remove_not_usefull_words($search);
+        $search_words = explode(' ', $search_part);
+
+        $ouvrages = Ouvrage::Where(function ($query) use ($search_words) {
+                for ($i = 0; $i < count($search_words); $i++) {
+                    $query->orwhere('titre', 'LIKE', '%' . $search_words[$i] . '%');
+                    $query->orwhere('auteur', 'LIKE', '%' . $search_words[$i] . '%');
+                    $query->orwhere('editeur', 'LIKE', '%' . $search_words[$i] . '%');
+                    $query->orwhere('annee', 'LIKE', '%' . $search_words[$i] . '%');
+                    $query->orwhere('description', 'LIKE', '%' . $search_words[$i] . '%');
+                    $query->orwhere('slug', 'LIKE', '%' . $search_words[$i] . '%');
+                }
+            })
+            ->paginate(6);
+
+        return view('result-search-ouvrages', compact('ouvrages', 'search'));
+    }
 }

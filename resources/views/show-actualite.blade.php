@@ -27,7 +27,7 @@
                         <article class="blog-details">
 
                             <div class="post-img">
-                                <img src="{{ asset('storage/' . $actualite->image) }}" alt="" class="img-fluid">
+                                <img src="{{ asset('storage/' . $actualite->image) }}" alt="" class="img-fluid"  style="width: 100%; height: 550px;">
                             </div>
 
                             <h2 class="title">

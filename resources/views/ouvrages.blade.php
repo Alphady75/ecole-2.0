@@ -5,7 +5,7 @@
 
         <!-- ======= Breadcrumbs ======= -->
         <div class="breadcrumbs d-flex align-items-center"
-            style="background-image: url('{{ asset('assets/img/tech.jpg') }}');">
+            style="background-image: url('{{ asset('assets/img/Des-livres-incontournables-600x200.jpg') }}');">
             <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
 
                 <h2>Ouvrages</h2>
@@ -36,16 +36,8 @@
                             return $text;
                         }
                     @endphp
-                    
-                    <div class="sidebar">
-                        <div class="sidebar-item search-form">
-                            <h3 class="sidebar-title">Search</h3>
-                            <form action="" class="mt-3">
-                                <input type="text">
-                                <button type="submit"><i class="bi bi-search"></i></button>
-                            </form>
-                        </div>
-                    </div>
+
+                    @livewire('search-ouvrage')
 
                     @foreach ($ouvrages as $ouvrage)
                         <div class="col-xl-4 col-md-6">
