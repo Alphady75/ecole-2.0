@@ -16,7 +16,11 @@ class Controller extends BaseController
 
     public function index()
     {
-        return view('accueil');
+        $actualites = Actualite::orderBy('created_at', 'desc')
+            ->take(6)
+            ->get();
+
+        return view('accueil', compact('actualites'));
     }
 
     public function about()
@@ -94,12 +98,12 @@ class Controller extends BaseController
         $search = implode(' ', $search); */
 
         $actualites = Actualite::Where(function ($query) use ($search_words) {
-                for ($i = 0; $i < count($search_words); $i++) {
-                    $query->orwhere('title', 'LIKE', '%' . $search_words[$i] . '%');
-                    $query->orwhere('content', 'LIKE', '%' . $search_words[$i] . '%');
-                    $query->orwhere('slug', 'LIKE', '%' . $search_words[$i] . '%');
-                }
-            })
+            for ($i = 0; $i < count($search_words); $i++) {
+                $query->orwhere('title', 'LIKE', '%' . $search_words[$i] . '%');
+                $query->orwhere('content', 'LIKE', '%' . $search_words[$i] . '%');
+                $query->orwhere('slug', 'LIKE', '%' . $search_words[$i] . '%');
+            }
+        })
             ->paginate(6);
 
         return view('result-search-actualites', compact('actualites', 'search'));
@@ -121,15 +125,15 @@ class Controller extends BaseController
         $search_words = explode(' ', $search_part);
 
         $ouvrages = Ouvrage::Where(function ($query) use ($search_words) {
-                for ($i = 0; $i < count($search_words); $i++) {
-                    $query->orwhere('titre', 'LIKE', '%' . $search_words[$i] . '%');
-                    $query->orwhere('auteur', 'LIKE', '%' . $search_words[$i] . '%');
-                    $query->orwhere('editeur', 'LIKE', '%' . $search_words[$i] . '%');
-                    $query->orwhere('annee', 'LIKE', '%' . $search_words[$i] . '%');
-                    $query->orwhere('description', 'LIKE', '%' . $search_words[$i] . '%');
-                    $query->orwhere('slug', 'LIKE', '%' . $search_words[$i] . '%');
-                }
-            })
+            for ($i = 0; $i < count($search_words); $i++) {
+                $query->orwhere('titre', 'LIKE', '%' . $search_words[$i] . '%');
+                $query->orwhere('auteur', 'LIKE', '%' . $search_words[$i] . '%');
+                $query->orwhere('editeur', 'LIKE', '%' . $search_words[$i] . '%');
+                $query->orwhere('annee', 'LIKE', '%' . $search_words[$i] . '%');
+                $query->orwhere('description', 'LIKE', '%' . $search_words[$i] . '%');
+                $query->orwhere('slug', 'LIKE', '%' . $search_words[$i] . '%');
+            }
+        })
             ->paginate(6);
 
         return view('result-search-ouvrages', compact('ouvrages', 'search'));
