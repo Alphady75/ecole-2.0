@@ -12,52 +12,42 @@
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
         <nav id="navbar" class="navbar">
             <ul>
-                @if (Route::is('accueil'))
-                    <li><a href="/" class="active">Accueil</a></li>
-                @else
-                    <li><a href="/">Accueil</a></li>
-                @endif
+                <li><a href="/" class="{{ set_active_route('accueil') }}">Accueil</a></li>
 
-                @if (Route::is('about'))
-                    <li><a href="{{ route('about') }}" class="active">à propros de nous</a></li>
-                @else
-                    <li><a href="{{ route('about') }}">à propros de nous</a></li>
-                @endif
+                <li><a href="{{ route('about') }}" class="{{ set_active_route('about') }}">à propros de nous</a>
+                </li>
 
-                @if (Route::is('ateliers'))
-                    <li><a href="{{ route('ateliers') }}" class="active">Ateliers pratiques</a></li>
-                @else
-                    <li><a href="{{ route('ateliers') }}">Ateliers pratiques</a></li>
-                @endif
-                <li><a href="#">Filière</a></li>
 
-                @if (Route::is('actualites'))
-                    <li><a href="{{ route('actualites') }}" class="active">Actualité</a></li>
-                @else
-                    <li><a href="{{ route('actualites') }}">Actualité</a></li>
-                @endif
+                <li><a href="{{ route('actualites') }}" class="{{ set_active_route('actualites') }}">Actualités</a>
+                </li>
 
-                @if (Route::is('contact'))
-                    <li><a href="{{ route('contact') }}" class="active">Contact</a></li>
-                @else
-                    <li><a href="{{ route('contact') }}">Contact</a></li>
-                @endif
+
+                <li><a href="{{ route('ateliers') }}" class="{{ set_active_route('ateliers') }}">Ateliers
+                        pratiques</a></li>
+
+
+                <li><a target="_blank" rel="noopener noreferrer" href="{{ asset('assets/filiere.pdf') }}">Filières</a>
+                </li>
+
+                <li><a href="{{ route('contact') }}" class="{{ set_active_route('contact') }}">Contact</a></li>
+
 
                 @if (Route::has('login'))
                     @auth
-                        <li class="dropdown"><a
-                                href="#"><span>{{ Auth::user()->pseudo ?? Auth::user()->name }}</span> <i
-                                    class="bi bi-chevron-down dropdown-indicator"></i></a>
+                        <li class="dropdown">
+                            <a href="#"
+                                class="{{ set_active_route('ouvrages') }}"><span>{{ Auth::user()->pseudo ?? Auth::user()->name }}</span>
+                                <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+
                             <ul>
                                 @if (Auth::user()->statut == 'Etudiant')
                                     <li><a href="{{ route('ouvrages') }}">Bibliothèque</a></li>
-
                                 @endif
 
                                 @if (Auth::user()->statut == 'Professeur')
                                     <li><a href="#">Saisie des notes</a></li>
-
                                 @endif
+
                                 <li>
                                     <a href="{{ route('logout') }}" class="dropdown-item "
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -71,11 +61,7 @@
                             </ul>
                         </li>
                     @else
-                        @if (Route::is('login'))
-                            <li><a href="/login" class="active">Compte</a></li>
-                        @else
-                            <li><a href="/login">Compte</a></li>
-                        @endif
+                        <li><a href="/login" class="{{ set_active_route('login') }} {{ set_active_route('register') }} ">Compte</a></li>
                     @endauth
                 @endif
                 {{-- <li class="dropdown"><a href="#"><span>Création du compte</span> <i

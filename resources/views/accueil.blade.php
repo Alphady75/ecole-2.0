@@ -70,12 +70,12 @@ function truncate($text, $chars = 25)
                     <div class="col-lg-6 d-flex align-items-center" data-aos="fade-up">
                         <div class="content">
                             <h3>Minus hic non reiciendis ea possimus at quia.</h3>
-                            <p>Rem id rerum. Debitis deserunt quidem delectus expedita ducimus dolor. Aut iusto ipsa. Eos
+                            <p style="text-align: justify">Rem id rerum. Debitis deserunt quidem delectus expedita ducimus dolor. Aut iusto ipsa. Eos
                                 ipsum nobis
                                 ipsa soluta itaque perspiciatis fuga ipsum perspiciatis. Eum amet fugiat totam nisi possimus
                                 ut delectus
                                 dicta.
-                            <p>Aliquam velit deserunt autem. Inventore et saepe. Tenetur suscipit eligendi labore culpa eos.
+                            <p style="text-align: justify">Aliquam velit deserunt autem. Inventore et saepe. Tenetur suscipit eligendi labore culpa eos.
                                 Deserunt
                                 porro magni qui necessitatibus dolorem at animi cupiditate.</p>
                         </div>
